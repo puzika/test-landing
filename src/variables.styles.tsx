@@ -1,6 +1,7 @@
 export const clrBase = '#fff';
 export const clrFont = 'rgb(41, 50, 68)';
 export const clrFontMuted = '#a0a9b8';
+export const clrRadio = '#d0d4dc';
 export const clrBlack = '#000';
 export const clrDisabled = 'rgba(68, 83, 113, 0.5)';
 export const clrDisabledBtn = 'rgba(68, 83, 113, 0.1)';

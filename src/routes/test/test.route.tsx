@@ -1,11 +1,10 @@
-import type { ReactNode } from "react"
+import Form from '../../components/form/form.component';
+import * as S from './test.styles';
 
-type TestProps = {
-  children?: ReactNode,
-}
-
-export default function Test({ children }: TestProps) {
+export default function Test() {
   return (
-    <>{ children }</>
+    <S.TestContainer>
+      <Form />
+    </S.TestContainer>
   )
 }
