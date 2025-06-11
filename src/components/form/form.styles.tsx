@@ -33,4 +33,4 @@ export const InputField = styled.input<InputStyleProps>`
   &:hover {
     border-color: ${vars.clrFocus};
   }
-`
+`;
