@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import { useAppSelector } from '../../store/hooks';
+import { selectAnswers } from '../../slices/test.slice';
 import type { RadioProps } from '../../components/radio/radio.component';
 import { useNavigate } from 'react-router';
 import { routes } from '../root/root.route';
@@ -29,14 +31,14 @@ type Test = Section[];
 
 export default function Test() {
   const navigate = useNavigate();
+  const answers = useAppSelector(selectAnswers);
   const [test, setState] = useState<Test | null>(null);
-  const [answers, setAnswers] = useState<{[key: string]: string}>({});
 
   console.log(answers);
 
   useEffect(() => {
     const getTest = async() => {
-      const res = await fetch('/public/data/db.json');
+      const res = await fetch('/data/db.json');
       const data = await res.json() as Test;
       setState(data);
     }
@@ -44,29 +46,35 @@ export default function Test() {
     getTest();
   }, []);
 
+  const testContent = useMemo(() => (test?.map(({ section, questions, id }) => (
+    <S.Section key={id}>
+      <Heading title={`Раздел ${id}: ${section}`} />
+      {
+        questions.map(({ question, questiontype, options }) => {
+          const questionId = `${question}${crypto.randomUUID()}`;
+
+          return ((
+            <S.Question key={questionId}>
+              <p>{question}</p>
+              {
+                questiontype === 'multiple' ? (
+                  <Radiogroup radios={options.map(op => ({ name: questionId, value: op } as RadioProps))} />
+                ) : (
+                  <TextArea question={questionId} />
+                )
+              }
+            </S.Question>
+          ))
+        })
+      }
+    </S.Section>
+  ))), [test]);
+
   return (
     <S.TestContainer>
       <Form />
       {
-        test?.map(({ section, questions, id }) => (
-          <S.Section key={id}>
-            <Heading title={section} />
-            {
-              questions.map(({ question, questiontype, options }, idx) => (
-                <S.Question key={`${question}${crypto.randomUUID()}`}>
-                  <p>{question}</p>
-                  {
-                    questiontype === 'multiple' ? (
-                      <Radiogroup radios={options.map(op => ({ name: `${question}${idx}`, value: op } as RadioProps))} />
-                    ) : (
-                      <TextArea />
-                    )
-                  }
-                </S.Question>
-              ))
-            }
-          </S.Section>
-        ))
+        testContent
       }
       <Footer>
         <Btn btnType='previous' clickHandler={() => navigate(`/${routes.images}`)}>
