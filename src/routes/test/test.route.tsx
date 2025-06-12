@@ -4,6 +4,7 @@ import { selectAnswers } from '../../slices/test.slice';
 import type { RadioProps } from '../../components/radio/radio.component';
 import { useNavigate } from 'react-router';
 import { routes } from '../root/root.route';
+import { formSize } from '../../components/form/form.component';
 import Form from '../../components/form/form.component';
 import Heading from '../../components/heading/heading.component';
 import Radiogroup from '../../components/radiogroup/radiogroup.component';
@@ -32,9 +33,18 @@ type Test = Section[];
 export default function Test() {
   const navigate = useNavigate();
   const answers = useAppSelector(selectAnswers);
+  const answeredCount = Object.keys(answers).length;
   const [test, setState] = useState<Test | null>(null);
+  
+  const questionCount = useMemo(() => {
+    if (!test) return Infinity;
 
-  console.log(answers);
+    let cnt = 0;
+
+    for (const section of test) cnt += section.questions.length;
+
+    return cnt + formSize;
+  }, [test])
 
   useEffect(() => {
     const getTest = async() => {
@@ -70,18 +80,18 @@ export default function Test() {
     </S.Section>
   ))), [test]);
 
+  const btn = answeredCount === questionCount ? 
+    <Btn btnType='next'><span>Узнать результаты</span><img src={DoubleRightArrowEnabled} alt="next" /></Btn> :
+    <Btn btnType='disabled'><span>Узнать результаты</span><img src={DoubleRightArrowDisabled} alt="next" /></Btn>;
+
   return (
     <S.TestContainer>
-      <Form />
-      {
-        testContent
-      }
-      <Footer>
+      <Form />{ testContent }<Footer>
         <Btn btnType='previous' clickHandler={() => navigate(`/${routes.images}`)}>
           <img src={LeftArrow} alt="previous" />
           <span>К загрузке рисунков</span>
         </Btn>
-        <Btn btnType='disabled'>Узнать результаты</Btn>
+        { btn }
       </Footer>
     </S.TestContainer>
   )

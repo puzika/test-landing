@@ -21,7 +21,7 @@ export const testSlice = createSlice({
     removeAnswer(state, action: PayloadAction<string>) {
       const { payload } = action;
       delete state.answers[payload];
-    }
+    },
   }
 });
 

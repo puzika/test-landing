@@ -34,3 +34,9 @@ export const InputField = styled.input<InputStyleProps>`
     border-color: ${vars.clrFocus};
   }
 `;
+
+export const Row = styled.input`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`
