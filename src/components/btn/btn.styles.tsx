@@ -12,6 +12,8 @@ export const Btn = styled.button<BtnStyleProps>`
   gap: 1rem;
   font-size: inherit;
   font-family: inherit;
+  display: flex;
+  justify-content: center;
   padding: 1rem 2.4rem;
   border: none;
   border-radius: 10rem;

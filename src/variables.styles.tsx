@@ -17,3 +17,5 @@ export const clrWarningLtr = '#fdeeef';
 export const clrFocus = '#6447cf';
 
 export const contentPadding = '8rem 8rem 4rem';
+export const contentPaddingLp = '6.4rem 6.4rem 3.2rem';
+export const contentPaddingTb = '4rem 4rem 2rem';

@@ -43,7 +43,7 @@ export default function ImageLoader({ description, urlData, setUrlData }: ImageL
 
   return (
     <S.ImageLoaderContainer>
-      <S.ImageLoader {...getRootProps({ className: 'dropzone'})}>
+      <S.ImageLoader {...getRootProps()}>
         <input {...getInputProps()} />
         {
           urlData ? (

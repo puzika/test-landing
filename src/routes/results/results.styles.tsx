@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { responsive } from "../../breakpoints";
 import * as vars from '../../variables.styles';
 
 export const Results = styled.section`
@@ -6,6 +7,12 @@ export const Results = styled.section`
   flex-direction: column;
   row-gap: 5rem;
   padding: ${vars.contentPadding};
+  ${responsive.lp({
+    padding: vars.contentPaddingLp
+  })}
+  ${responsive.tb({
+    padding: vars.contentPaddingTb
+  })}
 `;
 
 export const ResultsSection = styled.section`
