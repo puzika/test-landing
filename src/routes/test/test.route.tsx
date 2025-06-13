@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { routes } from '../root/root.route';
 import { formSize } from '../../components/form/form.component';
 import Form from '../../components/form/form.component';
+import Warning from '../../components/warning/warning.component';
 import Section, { type SectionProps } from '../../components/section/section.component';
 import Footer from '../../components/footer/footer.component';
 import Btn from '../../components/btn/btn.component';
@@ -50,7 +51,10 @@ export default function Test() {
 
   return (
     <S.TestContainer>
-      <Form />{ testContent }<Footer>
+      <Form />
+      <Warning />
+      { testContent }
+      <Footer>
         <Btn btnType='previous' clickHandler={() => navigate(`/${routes.images}`)}>
           <img src={LeftArrow} alt="previous" />
           <span>К загрузке рисунков</span>
