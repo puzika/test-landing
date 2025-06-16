@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../store/hooks'
 import { addAnswer, removeAnswer } from '../../slices/test.slice'
 import Heading from '../heading/heading.component'
 import Radiogroup from '../radiogroup/radiogroup.component'
+import DatePicker from '../calendar/calendar.component'
 import * as S from './form.styles'
 
 const fieldnames = {
@@ -19,7 +20,6 @@ export default function Form() {
   const dispatch = useAppDispatch();
   const [childname, setChildname] = useState<string>('');
   const [parentname, setParentname] = useState<string>('');
-  const [birthdate, setBirthdate] = useState<string>('');
   
   const handleChange = (e: ChangeEvent<HTMLInputElement>, fieldname: string, setter: Dispatch<SetStateAction<string>>): void => {
     const {value} = e.target;
@@ -38,7 +38,7 @@ export default function Form() {
       </S.Item>
       <S.Item>
         <span>{fieldnames.birthdate}</span>
-        <S.InputField value={birthdate} onChange={e => handleChange(e, fieldnames.birthdate, setBirthdate)} type='date' $type='date'/>
+        <DatePicker name={fieldnames.birthdate} />
       </S.Item>
       <S.Item>
         <span>{fieldnames.sex}</span>

@@ -22,6 +22,8 @@ export default function Test() {
   const answeredCount = Object.keys(answers).length;
   const [test, setState] = useState<Test | null>(null);
 
+  console.log(answeredCount);
+
   useEffect(() => {
     const getTest = async() => {
       const res = await fetch('/data/db.json');
